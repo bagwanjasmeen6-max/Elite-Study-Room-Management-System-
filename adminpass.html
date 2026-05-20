@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Elite Study Rooms</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #0f172a; /* Dark professional background */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .input-field {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: #6366f1;
+            background: rgba(15, 23, 42, 0.8);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+        }
+
+        .admin-glow {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
+            z-index: -1;
+        }
+
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            50% { transform: translateX(8px); }
+            75% { transform: translateX(-8px); }
+        }
+    </style>
+</head>
+<body class="p-4">
+
+    <div id="cardContainer" class="max-w-md w-full login-card rounded-3xl p-8 md:p-12 relative overflow-hidden">
+        <div class="admin-glow"></div>
+        
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-indigo-600 text-white rounded-2xl mb-6 shadow-2xl shadow-indigo-500/20">
+                <i class="fas fa-user-shield text-2xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-white tracking-tight">System Admin</h1>
+            <p class="text-slate-400 text-sm mt-2">Authorized Personnel Access Only</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMsg" class="hidden bg-rose-500/10 border border-rose-500/50 text-rose-500 text-xs font-bold p-3 rounded-xl mb-6 text-center">
+            <i class="fas fa-exclamation-triangle mr-2"></i> Invalid Admin Credentials
+        </div>
+
+        <!-- Login Form -->
+        <form id="adminLoginForm" class="space-y-6">
+            <!-- Admin ID / Phone -->
+            <div class="space-y-2">
+                <label class="text-xs font-bold uppercase text-slate-400 tracking-widest ml-1">Admin Identity</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-500">
+                        <i class="fas fa-id-badge text-sm"></i>
+                    </span>
+                    <input type="text" id="adminId" required placeholder="Enter ID" 
+                        class="input-field w-full pl-11 pr-4 py-4 rounded-2xl placeholder:text-slate-600">
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="space-y-2">
+                <label class="text-xs font-bold uppercase text-slate-400 tracking-widest ml-1">Secure Password</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-500">
+                        <i class="fas fa-key text-sm"></i>
+                    </span>
+                    <input type="password" id="adminPass" required placeholder="••••••••" 
+                        class="input-field w-full pl-11 pr-12 py-4 rounded-2xl placeholder:text-slate-600">
+                    <button type="button" onclick="togglePass()" class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-500 hover:text-indigo-400">
+                        <i class="fas fa-eye text-sm" id="eyeIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Verification Action -->
+            <div class="pt-4">
+                <button type="submit" id="loginBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-indigo-500/30 transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+                    Verify & Enter Dashboard
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+        </form>
+
+        <!-- Footer -->
+        <div class="mt-12 pt-8 border-t border-slate-700/50 text-center">
+            <p class="text-[10px] text-slate-500 uppercase tracking-[0.2em]">
+                Elite Study Rooms Management <br>
+                Terminal v2.4.0
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function togglePass() {
+            const passInput = document.getElementById('adminPass');
+            const eyeIcon = document.getElementById('eyeIcon');
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                icon = eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                passInput.type = 'password';
+                icon = eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        document.getElementById('adminLoginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            const errorMsg = document.getElementById('errorMsg');
+            const card = document.getElementById('cardContainer');
+            
+            const adminId = document.getElementById('adminId').value;
+            const adminPass = document.getElementById('adminPass').value;
+
+            // Clear previous errors
+            errorMsg.classList.add('hidden');
+            card.classList.remove('shake');
+
+            // Visual feedback
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Authenticating...';
+
+            setTimeout(() => {
+                // REQUIRED CREDENTIALS CHECK
+                if (adminId === "aqsa" && adminPass === "aqsa1234") {
+                    console.log("Login successful");
+                    sessionStorage.setItem('eliteAdminLoggedIn', 'true');
+                    
+                    document.body.innerHTML = `
+                        <div class="text-white text-center animate-pulse">
+                            <i class="fas fa-shield-check text-indigo-500 text-5xl mb-4"></i>
+                            <h2 class="text-2xl font-bold">Access Granted</h2>
+                            <p class="text-slate-400 text-sm mt-2">Loading Admin Environment...</p>
+                        </div>
+                    `;
+                    
+                    setTimeout(() => {
+                        try {
+                            window.location.href = './admin_dashboard.html';
+                        } catch (err) {
+                            console.error("Navigation error:", err);
+                        }
+                    }, 1000);
+                } else {
+                    // FAIL STATE
+                    btn.disabled = false;
+                    btn.innerHTML = 'Verify & Enter Dashboard <i class="fas fa-arrow-right text-xs"></i>';
+                    errorMsg.classList.remove('hidden');
+                    card.classList.add('shake');
+                    console.error("Access Denied: Invalid Credentials");
+                }
+            }, 1200);
+        });
+    </script>
+</body>
+</html>

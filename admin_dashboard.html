@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Elite Study Rooms</title>
+  <link rel="stylesheet" href="portal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="firstpageweb.html">
+        <span class="brand-mark"><i class="fa-solid fa-user-shield"></i></span>
+        <span>ELITE<br><small>Admin Dashboard</small></span>
+      </a>
+      <nav class="nav-actions">
+        <a class="button secondary" href="firstpageweb.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a class="button secondary" href="userportal.html"><i class="fa-solid fa-calendar-check"></i> User Booking</a>
+        <button id="logoutBtn" class="button secondary" type="button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      </nav>
+    </header>
+
+    <section class="hero-panel">
+      <div class="toolbar">
+        <div>
+          <p class="eyebrow"><i class="fa-solid fa-database"></i> Firebase Booking Control</p>
+          <h1>Manage rooms, slots, and booking approvals.</h1>
+          <p class="lead">Use the seed button once after connecting Firebase to create the default rooms and time slots in Firestore.</p>
+        </div>
+        <button id="seedBtn" class="button" type="button"><i class="fa-solid fa-wand-magic-sparkles"></i> Seed Default Setup</button>
+      </div>
+      <div class="status-strip">
+        <div class="metric"><strong id="totalBookings">0</strong><span>Total Bookings</span></div>
+        <div class="metric"><strong id="pendingBookings">0</strong><span>Pending</span></div>
+        <div class="metric"><strong id="approvedBookings">0</strong><span>Approved</span></div>
+      </div>
+      <div id="adminMessage" class="notice" hidden></div>
+    </section>
+
+    <section class="tabs">
+      <button class="button tab active" type="button" data-tab="bookings"><i class="fa-solid fa-list-check"></i> Bookings</button>
+      <button class="button tab" type="button" data-tab="rooms"><i class="fa-solid fa-door-open"></i> Rooms</button>
+      <button class="button tab" type="button" data-tab="slots"><i class="fa-solid fa-clock"></i> Slots</button>
+    </section>
+
+    <section id="tab-bookings" class="panel">
+      <div class="toolbar">
+        <div>
+          <p class="eyebrow"><i class="fa-solid fa-clipboard-list"></i> Requests</p>
+          <h2>Booking Approval Queue</h2>
+        </div>
+        <div class="nav-actions">
+          <input id="bookingSearch" placeholder="Search name, phone, room">
+          <select id="statusFilter">
+            <option value="">All status</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <button id="refreshAdmin" class="button secondary" type="button"><i class="fa-solid fa-rotate"></i></button>
+        </div>
+      </div>
+      <div id="adminBookingList" class="list"></div>
+    </section>
+
+    <section id="tab-rooms" class="admin-layout" hidden>
+      <form id="roomForm" class="panel grid">
+        <div>
+          <p class="eyebrow"><i class="fa-solid fa-plus"></i> Room Setup</p>
+          <h2>Add / Update Room</h2>
+        </div>
+        <input id="roomId" type="hidden">
+        <div class="field">
+          <label for="roomName">Room Name</label>
+          <input id="roomName" required placeholder="Silent Zone">
+        </div>
+        <div class="field">
+          <label for="roomType">Type</label>
+          <input id="roomType" required placeholder="Study Desk">
+        </div>
+        <div class="grid two">
+          <div class="field">
+            <label for="roomCapacity">Capacity</label>
+            <input id="roomCapacity" type="number" min="1" required>
+          </div>
+          <div class="field">
+            <label for="roomPrice">Price</label>
+            <input id="roomPrice" type="number" min="0" required>
+          </div>
+        </div>
+        <button class="button" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save Room</button>
+      </form>
+
+      <div class="panel">
+        <div class="toolbar">
+          <div>
+            <p class="eyebrow"><i class="fa-solid fa-door-open"></i> Active Inventory</p>
+            <h2>Rooms</h2>
+          </div>
+        </div>
+        <div id="roomList" class="list"></div>
+      </div>
+    </section>
+
+    <section id="tab-slots" class="admin-layout" hidden>
+      <form id="slotForm" class="panel grid">
+        <div>
+          <p class="eyebrow"><i class="fa-solid fa-plus"></i> Slot Setup</p>
+          <h2>Add / Update Slot</h2>
+        </div>
+        <input id="slotId" type="hidden">
+        <div class="field">
+          <label for="slotLabel">Slot Name</label>
+          <input id="slotLabel" required placeholder="Morning">
+        </div>
+        <div class="grid two">
+          <div class="field">
+            <label for="slotStart">Start Time</label>
+            <input id="slotStart" type="time" required>
+          </div>
+          <div class="field">
+            <label for="slotEnd">End Time</label>
+            <input id="slotEnd" type="time" required>
+          </div>
+        </div>
+        <button class="button" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save Slot</button>
+      </form>
+
+      <div class="panel">
+        <div class="toolbar">
+          <div>
+            <p class="eyebrow"><i class="fa-solid fa-clock"></i> Daily Timetable</p>
+            <h2>Slots</h2>
+          </div>
+        </div>
+        <div id="slotList" class="list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
+  <script src="./firebase-config.js"></script>
+  <script src="./admin-dashboard.js"></script>
+</body>
+</html>

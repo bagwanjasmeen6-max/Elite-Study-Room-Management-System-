@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Login - Elite Study Rooms</title>
+  <link rel="stylesheet" href="portal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="firstpageweb.html">
+        <span class="brand-mark"><i class="fa-solid fa-user-graduate"></i></span>
+        <span>ELITE<br><small>User Access</small></span>
+      </a>
+      <nav class="nav-actions">
+        <a class="button secondary" href="firstpageweb.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a class="button secondary" href="userportal.html"><i class="fa-solid fa-calendar-check"></i> Booking Portal</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-panel">
+        <p class="eyebrow"><i class="fa-solid fa-database"></i>  User Accounts</p>
+        <h1>Create your account before booking.</h1>
+        <p class="lead">Register once with password and city, then use the same account for bookings, payment updates, and receipt tracking.</p>
+        <div class="status-strip">
+          <div class="metric"><strong>4</strong><span>Locations</span></div>
+          <div class="metric"><strong>1</strong><span>Account Per User</span></div>
+          <div class="metric"><strong>Secure</strong><span> Store</span></div>
+        </div>
+        <div id="authMessage" class="notice" hidden></div>
+      </div>
+
+      <section class="panel grid">
+        <div class="tabs">
+          <button class="button tab active" type="button" data-auth-tab="register"><i class="fa-solid fa-user-plus"></i> Register</button>
+          <button class="button tab" type="button" data-auth-tab="login"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+        </div>
+
+        <form id="registerForm" class="grid">
+          <div class="toolbar">
+            <div>
+              <p class="eyebrow"><i class="fa-solid fa-id-card"></i> New User</p>
+              <h2>Create Account</h2>
+            </div>
+          </div>
+          <div class="grid two">
+            <div class="field">
+              <label for="registerName">Full Name</label>
+              <input id="registerName" name="fullName" required placeholder="Student name">
+            </div>
+            <div class="field">
+              <label for="registerPhone">Phone</label>
+              <input id="registerPhone" name="phone" required inputmode="tel" placeholder="10 digit mobile">
+            </div>
+          </div>
+          <div class="grid two">
+            <div class="field">
+              <label for="registerEmail">Email</label>
+              <input id="registerEmail" name="email" type="email" required placeholder="student@email.com">
+            </div>
+            <div class="field">
+              <label for="registerLocation">Location</label>
+              <select id="registerLocation" name="location" required>
+                <option value="">Select location</option>
+                <option value="Pune">Pune</option>
+                <option value="Kolhapur">Kolhapur</option>
+                <option value="Sangli">Sangli</option>
+                <option value="Satara">Satara</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="registerPassword">Password</label>
+            <input id="registerPassword" name="password" type="password" required minlength="6" placeholder="Minimum 6 characters">
+          </div>
+          <button class="button" type="submit"><i class="fa-solid fa-user-check"></i> Create Account</button>
+        </form>
+
+        <form id="loginForm" class="grid" hidden>
+          <div class="toolbar">
+            <div>
+              <p class="eyebrow"><i class="fa-solid fa-lock"></i> Existing User</p>
+              <h2>Login</h2>
+            </div>
+          </div>
+          <div class="field">
+            <label for="loginValue">Email or Phone</label>
+            <input id="loginValue" name="login" required placeholder="Email or phone">
+          </div>
+          <div class="field">
+            <label for="loginPassword">Password</label>
+            <input id="loginPassword" name="password" type="password" required placeholder="Your password">
+          </div>
+          <button class="button" type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login to Booking Portal</button>
+        </form>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const message = document.getElementById("authMessage");
+      const registerForm = document.getElementById("registerForm");
+      const loginForm = document.getElementById("loginForm");
+
+      function setMessage(text, type) {
+        message.hidden = false;
+        message.className = `notice ${type || ""}`;
+        message.textContent = text;
+      }
+
+      async function authRequest(payload) {
+        let response;
+        try {
+          response = await fetch("./api/user_auth1.php", {
+
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+        } catch (e) {
+          throw new Error(`Failed to fetch. Check server/API path and that Apache is running. ${e?.message || e}`);
+        }
+
+        let result;
+        try {
+          result = await response.json();
+        } catch {
+          const text = await response.text().catch(() => "");
+          throw new Error(`Server did not return JSON. HTTP ${response.status}. ${text ? "Response: " + text.slice(0, 300) : ""}`);
+        }
+
+        if (!response.ok || !result.ok) {
+          throw new Error(result?.error || `Request failed (HTTP ${response.status})`);
+        }
+        return result;
+      }
+
+
+      function rememberUser(user) {
+        if (user) {
+          localStorage.setItem("elite-current-user", JSON.stringify(user));
+        }
+      }
+
+      document.querySelectorAll("[data-auth-tab]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const tab = button.dataset.authTab;
+          document.querySelectorAll("[data-auth-tab]").forEach((item) => item.classList.toggle("active", item === button));
+          registerForm.hidden = tab !== "register";
+          loginForm.hidden = tab !== "login";
+        });
+      });
+
+      registerForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(registerForm);
+        try {
+          const result = await authRequest({
+            action: "register",
+            fullName: String(formData.get("fullName") || ""),
+            phone: String(formData.get("phone") || ""),
+            email: String(formData.get("email") || ""),
+            password: String(formData.get("password") || ""),
+            location: String(formData.get("location") || "")
+          });
+          rememberUser(result.user);
+          setMessage("Account created. Redirecting to booking portal...", "good");
+          setTimeout(() => window.location.href = "./userportal.html", 800);
+        } catch (error) {
+          setMessage(error.message, "bad");
+        }
+      });
+
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(loginForm);
+        try {
+          const result = await authRequest({
+            action: "login",
+            login: String(formData.get("login") || ""),
+            password: String(formData.get("password") || "")
+          });
+          rememberUser(result.user);
+          setMessage("Login successful. Redirecting to booking portal...", "good");
+          setTimeout(() => window.location.href = "./userportal.html", 600);
+        } catch (error) {
+          setMessage(error.message, "bad");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

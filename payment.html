@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment - Elite Study Rooms</title>
+  <link rel="stylesheet" href="portal.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    .receipt-preview { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px; }
+    .receipt-row { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; border-bottom: 1px dashed #e5e7eb; }
+    .receipt-row:last-child { border-bottom: none; }
+    .receipt-title { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .token-box { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 14px 16px; border-radius: 8px; background: #eef2ff; color: #312e81; font-size: 24px; font-weight: 800; }
+    @media print {
+      body { background: #fff !important; }
+      #paymentForm, #payNowBtn { display: none !important; }
+      #printSection { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="firstpageweb.html">
+        <span class="brand-mark"><i class="fa-solid fa-qrcode"></i></span>
+        <span>ELITE<br><small>Payment</small></span>
+      </a>
+      <nav class="nav-actions">
+        <a class="button secondary" href="userportal.html"><i class="fa-solid fa-calendar-check"></i> Back</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-panel">
+        <p class="eyebrow"><i class="fa-solid fa-credit-card"></i> Pay & Confirm Seat</p>
+        <h1>Pay for your reserved seat.</h1>
+        <p class="lead">Check your seat, time, and amount. Then choose a payment method and print your token.</p>
+        <div class="token-box"><i class="fa-solid fa-ticket"></i><span id="tokenDisplay">-</span></div>
+
+        <div id="message" class="notice" hidden></div>
+
+        <div id="printSection" style="display:none; margin-top:18px;">
+          <div class="receipt-preview">
+            <div class="receipt-title">
+              <span class="badge">PAID RECEIPT</span>
+              <span style="color:#64748b; font-weight:800;">Elite Study Rooms</span>
+            </div>
+            <div class="receipt-row"><div><b>Booking ID</b></div><div id="rBookingId"></div></div>
+            <div class="receipt-row"><div><b>Student</b></div><div id="rUserName"></div></div>
+            <div class="receipt-row"><div><b>Phone</b></div><div id="rPhone"></div></div>
+            <div class="receipt-row"><div><b>Email</b></div><div id="rEmail"></div></div>
+            <div class="receipt-row"><div><b>Room / Zone</b></div><div id="rRoomName"></div></div>
+            <div class="receipt-row"><div><b>Seat</b></div><div id="rSeatLabel"></div></div>
+            <div class="receipt-row"><div><b>Slot</b></div><div id="rSlotLabel"></div></div>
+            <div class="receipt-row"><div><b>Date</b></div><div id="rDate"></div></div>
+            <div class="receipt-row"><div><b>Amount</b></div><div id="rAmount"></div></div>
+            <div class="receipt-row"><div><b>Status</b></div><div id="rStatus"></div></div>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;">
+            <button class="button secondary" id="printBtn" type="button"><i class="fa-solid fa-print"></i> Print Receipt</button>
+            <a class="button secondary" id="finalPageBtn" href="#"><i class="fa-solid fa-chair"></i> Final Allotment</a>
+            <a class="button" href="userportal.html"><i class="fa-solid fa-house"></i> Go to Portal</a>
+          </div>
+        </div>
+      </div>
+
+      <form id="paymentForm" class="panel grid" style="align-content:start;">
+        <div class="toolbar">
+          <div>
+            <p class="eyebrow"><i class="fa-solid fa-wallet"></i> Payment Details</p>
+            <h2>Confirm Payment</h2>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Booking Token</label>
+          <input id="bookingIdInput" required readonly />
+        </div>
+
+        <div class="field">
+          <label>Total Amount (Rs.)</label>
+          <input id="amountInput" type="number" min="1" step="0.01" required readonly />
+        </div>
+
+        <div class="field">
+          <label>Reservation Time</label>
+          <input id="reservationTimeInput" readonly />
+        </div>
+
+        <div class="field">
+          <label>Method</label>
+          <select id="methodInput" required>
+            <option value="upi" selected>UPI</option>
+            <option value="card">Card</option>
+            <option value="cash">Cash</option>
+          </select>
+        </div>
+        <input id="txInput" type="hidden" />
+
+        <button id="payNowBtn" class="button" type="submit">
+          <i class="fa-solid fa-print"></i> Pay & Print Token
+        </button>
+
+        <div class="notice bad" id="errorBox" hidden></div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    if (location.protocol === 'file:') {
+      const webUrl = `http://localhost/elite%20study%20room%20management/payment.html${location.search}`;
+      document.body.innerHTML = `
+        <main class="shell">
+          <section class="panel" style="max-width:720px;margin:60px auto;">
+            <p class="eyebrow"><i class="fa-solid fa-triangle-exclamation"></i> Open With XAMPP</p>
+            <h1 style="font-size:42px;">Please open payment through localhost.</h1>
+            <p class="lead">PHP pages only work through XAMPP/Apache. Local file mode shows PHP code as text and payment cannot run.</p>
+            <div class="actions" style="margin-top:22px;">
+              <a class="button" href="${webUrl}"><i class="fa-solid fa-arrow-right"></i> Open Payment Page</a>
+            </div>
+          </section>
+        </main>
+      `;
+      throw new Error('Open this page through localhost, not file mode.');
+    }
+
+    const apiBase = './api/payment_api.php';
+    const qs = new URLSearchParams(location.search);
+    const bookingId = qs.get('bookingId') || '';
+
+    const $ = (id) => document.getElementById(id);
+    const shortToken = (id) => String(id || "").replace(/^booking-/, "").replace(/^BK-/, "BK").slice(-8).toUpperCase();
+
+    function showMsg(text, type) {
+      const box = $('message');
+      box.hidden = false;
+      box.className = `notice ${type || ''}`;
+      box.textContent = text;
+    }
+
+    function showError(text) {
+      const box = $('errorBox');
+      box.hidden = false;
+      box.textContent = text;
+    }
+
+    function defaultTransactionRef() {
+      const method = $('methodInput').value.toUpperCase();
+      const idPart = shortToken(bookingId) || Math.floor(Date.now() / 1000);
+      return `${method}-${idPart}`;
+    }
+
+    function setDefaultTransactionRef(force) {
+      if (force || !$('txInput').value.trim()) {
+        $('txInput').value = defaultTransactionRef();
+      }
+    }
+
+    async function readJsonResponse(response) {
+      const text = await response.text();
+      try {
+        return JSON.parse(text);
+      } catch {
+        throw new Error(text || 'Invalid server response');
+      }
+    }
+
+    function fillReceipt(r) {
+      $('rBookingId').textContent = r.bookingId;
+      $('rUserName').textContent = r.userName;
+      $('rPhone').textContent = r.phone;
+      $('rEmail').textContent = r.email || '-';
+      $('rRoomName').textContent = r.roomName;
+      $('rSeatLabel').textContent = r.seatLabel;
+      $('rSlotLabel').textContent = r.slotLabel;
+      $('rDate').textContent = r.date;
+      $('rAmount').textContent = `Rs. ${Number(r.amount).toFixed(2)}`;
+      $('rStatus').textContent = r.status;
+
+      $('printSection').style.display = 'block';
+      $('finalPageBtn').href = `seat-allotted.html?bookingId=${encodeURIComponent(r.bookingId)}`;
+      $('tokenDisplay').textContent = shortToken(r.bookingId);
+      $('bookingIdInput').value = shortToken(r.bookingId);
+      $('reservationTimeInput').value = `${r.date || ''} | ${r.slotLabel || ''}`;
+    }
+
+    async function loadReceipt() {
+      if (!bookingId) {
+        showMsg('Missing bookingId in URL.', 'bad');
+        return;
+      }
+      $('bookingIdInput').value = shortToken(bookingId);
+
+      const res = await fetch(`${apiBase}?action=receipt&bookingId=${encodeURIComponent(bookingId)}`);
+      const json = await readJsonResponse(res);
+      if (!json.ok) {
+        showMsg(json.error || 'Could not load receipt', 'bad');
+        return;
+      }
+
+      const r = json.receipt;
+      fillReceipt(r);
+      $('amountInput').value = Number(r.amount || 0);
+      setDefaultTransactionRef(false);
+      if (Number(r.amount || 0) <= 0) {
+        showMsg('Amount could not be loaded. Please refresh the page or check room price setup.', 'bad');
+      }
+
+      // If already paid, hide payment form by default.
+      if (String(r.status || '').toLowerCase() === 'paid') {
+        $('paymentForm').style.display = 'none';
+        showMsg('This booking is already paid. You can print the receipt.', 'good');
+      }
+    }
+
+    $('printBtn').addEventListener('click', () => window.print());
+
+    $('paymentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      showError('');
+      $('errorBox').hidden = true;
+
+      const payload = {
+        bookingId,
+        amount: $('amountInput').value,
+        method: $('methodInput').value,
+        transactionRef: $('txInput').value.trim() || defaultTransactionRef()
+      };
+      $('txInput').value = payload.transactionRef;
+
+      $('payNowBtn').disabled = true;
+      try {
+        const resp = await fetch(`${apiBase}?action=pay`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const json = await readJsonResponse(resp);
+        if (!json.ok) {
+          showMsg(json.error || 'Payment failed', 'bad');
+          showError(json.error || 'Payment failed');
+          return;
+        }
+
+        showMsg('Payment successful. Receipt is ready for printing.', 'good');
+        window.location.href = `seat-allotted.html?bookingId=${encodeURIComponent(payload.bookingId)}`;
+      } catch (err) {
+        showMsg('Network error during payment.', 'bad');
+        showError(String(err?.message || err));
+      } finally {
+        $('payNowBtn').disabled = false;
+      }
+    });
+
+    $('methodInput').addEventListener('change', () => setDefaultTransactionRef(true));
+    setDefaultTransactionRef(true);
+    loadReceipt();
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,1079 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELITE STUDY Rooms & Management System | Premium Academic Workspace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        
+        :root {
+            --primary: #0f172a;
+            --accent: #4f46e5;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.1), transparent),
+                        radial-gradient(circle at bottom left, rgba(79, 70, 229, 0.05), transparent);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -8px rgba(15, 23, 42, 0.4);
+            background: #1e293b;
+        }
+
+        .feature-icon {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .floating-booking {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .timeline-line {
+            background: repeating-linear-gradient(to bottom, #4f46e5 0, #4f46e5 5px, transparent 5px, transparent 10px);
+        }
+
+        .admin-glow {
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.15);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+        }
+
+        @media (max-width: 640px) {
+            html, body {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            nav .h-20 {
+                height: auto;
+                min-height: 72px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            header {
+                padding-top: 104px !important;
+                padding-bottom: 56px !important;
+            }
+
+            h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.08 !important;
+            }
+
+            h2 {
+                font-size: 2rem !important;
+                line-height: 1.15 !important;
+            }
+
+            .rounded-\[3rem\],
+            .rounded-\[2\.5rem\] {
+                border-radius: 1.25rem !important;
+            }
+
+            .px-10,
+            .px-12 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            .py-24,
+            .py-32 {
+                padding-top: 3.5rem !important;
+                padding-bottom: 3.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-900 bg-white">
+
+    <!-- Availability Ticker -->
+    <div class="bg-indigo-600 text-white py-2 overflow-hidden whitespace-nowrap hidden md:block">
+        <div class="inline-block animate-marquee px-4">
+            <span class="mx-8 font-bold text-sm uppercase tracking-widest"><i class="fa-solid fa-circle text-[8px] mr-2 text-emerald-400"></i> Silent Zone: 12 Seats Left</span>
+            <span class="mx-8 font-bold text-sm uppercase tracking-widest"><i class="fa-solid fa-circle text-[8px] mr-2 text-emerald-400"></i> 2nd Floor Presentation Room: Available</span>
+            <span class="mx-8 font-bold text-sm uppercase tracking-widest"><i class="fa-solid fa-circle text-[8px] mr-2 text-amber-400"></i> Vibe Lounge: Almost Full</span>
+            <span class="mx-8 font-bold text-sm uppercase tracking-widest"><i class="fa-solid fa-star text-amber-400 mr-2"></i> Join 50+ students studying right now</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav top-0 md:top-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 feature-icon rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
+                        <i class="fa-solid fa-graduation-cap text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-bold tracking-tight text-slate-900 block leading-none">ELITE</span>
+                        <span class="text-[10px] font-bold tracking-[0.2em] text-indigo-600 uppercase">Study & CONFERENCE ROOMS</span>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:flex space-x-10 font-medium text-slate-600">
+                    <a href="#zones" class="hover:text-indigo-600 transition-colors">Floors & Zones</a>
+                    <a href="#Facilities" class="hover:text-indigo-600 transition-colors">Facilities</a>
+                    <a href="#rooms" class="hover:text-indigo-600 transition-colors">Rooms</a>
+                    <a href="#admin" class="hover:text-indigo-600 transition-colors">Admin Hub</a>
+                </div>
+
+               <!-- Action Buttons & User Login -->
+                <div class="flex items-center gap-4">
+                    
+                    <!-- Admin/User Login Section -->
+                    <div class="relative">
+                        <button id="adminBtn" class="flex items-center gap-2 p-1.5 pr-3 rounded-full bg-slate-100 hover:bg-white border border-slate-200 transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white shadow-inner pointer-events-none">
+                                <i class="fa-solid fa-user-shield text-xs"></i>
+                            </div>
+                            <span class="hidden md:inline text-sm font-semibold text-slate-700 pointer-events-none">Login</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none"></i>
+                        </button>
+
+                        <!-- Dropdown Menu (Toggle via JS) -->
+                        <div id="adminDropdown" class="hidden absolute right-0 mt-3 w-52 bg-white rounded-2xl shadow-2xl border border-slate-100 z-[60] overflow-hidden transform origin-top-right transition-all">
+                            <div class="px-4 py-3 border-b border-slate-50 bg-slate-50/50">
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Dashboard Access</p>
+                            </div>
+                            <div class="py-1">
+                                <a href="adminpass.html" class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                                    <div class="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600">
+                                        <i class="fa-solid fa-shield-halved text-xs"></i>
+                                    </div>
+                                    <span class="font-medium">Admin Portal</span>
+                                </a>
+                                <a href="userportal.html" class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                                    <div class="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-500">
+                                        <i class="fa-solid fa-circle-user text-xs"></i>
+                                    </div>
+                                    <span class="font-medium">User Login</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Online Booking Button -->
+                    <a href="userauth.html" class="btn-primary px-7 py-2.5 rounded-xl font-bold text-sm shadow-sm">
+                        New User Registration
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        // Toggle Logic for Login Dropdown
+        const adminBtn = document.getElementById('adminBtn');
+        const adminDropdown = document.getElementById('adminDropdown');
+
+        adminBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            adminDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking anywhere else on the screen
+        window.addEventListener('click', () => {
+            if (!adminDropdown.classList.contains('hidden')) {
+                adminDropdown.classList.add('hidden');
+            }
+        });
+    </script>
+    
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden hero-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-8 text-xs font-bold tracking-widest uppercase text-indigo-600 bg-indigo-50 rounded-full border border-indigo-100">
+                        <i class="fa-solid fa-medal"></i> India's Most Silent Workspace
+                    </div>
+                    <h1 class="text-6xl lg:text-7xl font-bold text-slate-900 mb-8 leading-[1.05]">
+                        Master Your <span class="text-indigo-600 italic">Deep Work.</span> No Distractions.
+                    </h1>
+                    <p class="text-xl text-slate-500 mb-10 max-w-xl leading-relaxed font-light">
+                        The ultimate library alternative. Experience high-speed fiber WiFi, premium ergonomic seating, and absolute silence designed for elite performance.
+                    </p>
+                    <div class="flex flex-wrap gap-5">
+                        <a href="userportal.html" class="btn-primary px-10 py-5 rounded-2xl font-bold text-lg shadow-xl shadow-slate-200">
+                            Register New User
+                        </a>
+                        <button class="bg-white border border-slate-200 text-slate-900 px-10 py-5 rounded-2xl font-bold text-lg hover:border-indigo-600 hover:text-indigo-600 transition-all">
+                            Virtual Tour
+                        </button>
+                    </div>
+                    
+                    <!-- Trust Badges -->
+                    <div class="mt-12 flex items-center gap-8 grayscale opacity-60">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> <span class="text-xs font-bold uppercase tracking-wider">CCTV Secure</span></div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-wifi"></i> <span class="text-xs font-bold uppercase tracking-wider">Fiber Optic</span></div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-leaf"></i> <span class="text-xs font-bold uppercase tracking-wider">Climate Controlled</span></div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1200" alt="Study Space" class="w-full h-auto">
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+ <!-- Amenities Grid -->
+    <section id="Facilities" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">World-Class Facilities</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Everything you need to stay focused, productive, and comfortable during your long study sessions.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card: CCTV -->
+                <div class="facility-card p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl hover:shadow-indigo-100 group">
+                    <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-video text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold mb-4 text-slate-900">CCTV & Safety</h5>
+                    <p class="text-slate-500 leading-relaxed">Complete security coverage to ensure a safe, worry-free space for all our members.</p>
+                </div>
+
+                <!-- Card: Cubicles -->
+                <div class="facility-card p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl hover:shadow-indigo-100 group">
+                    <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-desktop text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold mb-4 text-slate-900">Private Cubicles</h5>
+                    <p class="text-slate-500 leading-relaxed">Private, distraction-free cabins, each equipped with personal plug points for your devices.</p>
+                </div>
+
+                <!-- Card: Wi-Fi -->
+                <div class="facility-card p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl hover:shadow-indigo-100 group">
+                    <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-wifi text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold mb-4 text-slate-900">High-Speed Wi-Fi</h5>
+                    <p class="text-slate-500 leading-relaxed">Seamless 5G internet connectivity for all your research, downloads, and online classes.</p>
+                </div>
+
+                <!-- Card: Power Backup -->
+                <div class="facility-card p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl hover:shadow-indigo-100 group">
+                    <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-bolt-lightning text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold mb-4 text-slate-900">Full Power Backup</h5>
+                    <p class="text-slate-500 leading-relaxed">Reliable backup ensures your preparation is never interrupted by unexpected power cuts.</p>
+                </div>
+
+                <!-- Card: Ergonomic -->
+                <div class="facility-card p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl hover:shadow-indigo-100 group">
+                    <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-chair text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold mb-4 text-slate-900">Ergonomic Seating</h5>
+                    <p class="text-slate-500 leading-relaxed">Supportive, comfortable chairs designed specifically for long, focused study hours.</p>
+                </div>
+
+                <!-- Card: Lockers -->
+                <div class="facility-card p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl hover:shadow-indigo-100 group">
+                    <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-lock text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold mb-4 text-slate-900">Personal Lockers</h5>
+                    <p class="text-slate-500 leading-relaxed">Store your books and belongings safely so you can study and leave stress-free.</p>
+                </div>
+
+                <!-- Card: Transport -->
+                <div class="facility-card p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl hover:shadow-indigo-100 group">
+                    <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-bus text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold mb-4 text-slate-900">Easy Access</h5>
+                    <p class="text-slate-500 leading-relaxed">Located within walking distance of major bus routes and transport hubs for an easy commute.</p>
+                </div>
+
+                <!-- Card: Discussion -->
+                <div class="facility-card p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl hover:shadow-indigo-100 group">
+                    <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-comments text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold mb-4 text-slate-900">Discussion Zone</h5>
+                    <p class="text-slate-500 leading-relaxed">A dedicated area for group study, brainstorming, and collaborative learning without disturbing others.</p>
+                </div>
+
+                <!-- Card: Air Conditioning -->
+                <div class="facility-card p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl hover:shadow-indigo-100 group">
+                    <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-snowflake text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold mb-4 text-slate-900">Climate Controlled</h5>
+                    <p class="text-slate-500 leading-relaxed">Fully air-conditioned spaces to keep you cool and focused regardless of the weather outside.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
+
+<!-- Interactive Room Explorer Section -->
+    <section id="floor-2" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <span class="text-indigo-600 font-bold uppercase tracking-widest text-sm">Workspace Options</span>
+                <h2 class="text-4xl font-bold text-slate-900 mt-2">Find Your Perfect Setup</h2>
+                <p class="text-slate-600 mt-4 max-w-2xl mx-auto">Select a room type to explore the unique features and technology built into every corner of our 2nd-floor suite.</p>
+            </div>
+
+            <!-- Interaction Container -->
+             <section id="rooms" class="py-24 bg-white"></section>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="grid lg:grid-cols-12 gap-12">
+                
+                <!-- Room Type Sidebar/Toggles -->
+                <div class="lg:col-span-4 space-y-3">
+                    <button onclick="switchRoom('presentation')" id="tab-presentation" class="room-tab active w-full flex items-center gap-4 p-5 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-indigo-300">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 icon-box">
+                            <i class="fa-solid fa-chalkboard-user text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Presentation Suite</h3>
+                            <p class="text-sm opacity-70">Conferences & Seminars</p>
+                        </div>
+                    </button>
+
+                    <button onclick="switchRoom('pc')" id="tab-pc" class="room-tab w-full flex items-center gap-4 p-5 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-indigo-300">
+                        <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 icon-box">
+                            <i class="fa-solid fa-desktop text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Pro PC Desk</h3>
+                            <p class="text-sm opacity-70">High-Performance Work</p>
+                        </div>
+                    </button>
+
+                    <button onclick="switchRoom('group')" id="tab-group" class="room-tab w-full flex items-center gap-4 p-5 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-indigo-300">
+                        <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 icon-box">
+                            <i class="fa-solid fa-users text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Group Table</h3>
+                            <p class="text-sm opacity-70">Collaborative Huddles</p>
+                        </div>
+                    </button>
+
+                    <button onclick="switchRoom('switch')" id="tab-switch" class="room-tab w-full flex items-center gap-4 p-5 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-indigo-300">
+                        <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 icon-box">
+                            <i class="fa-solid fa-bolt text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Switch Desk</h3>
+                            <p class="text-sm opacity-70">Sit-to-Stand Flexibility</p>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Content Area -->
+                <div class="lg:col-span-8 bg-white rounded-[2.5rem] p-8 lg:p-12 shadow-xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden" id="room-content">
+                    <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
+                        <!-- Dynamic Image Display -->
+                        <div class="relative">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-4">
+                                    <img id="img-main" src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&q=80&w=600" class="rounded-3xl shadow-lg w-full h-48 object-cover" alt="Primary View">
+                                    <div id="stat-1-box" class="bg-indigo-600 p-6 rounded-3xl text-white">
+                                        <p id="stat-1-val" class="text-3xl font-bold mb-1">4K</p>
+                                        <p id="stat-1-label" class="text-[10px] uppercase tracking-widest font-bold opacity-80">Laser Projection</p>
+                                    </div>
+                                </div>
+                                <div class="pt-8 space-y-4">
+                                    <div id="stat-2-box" class="bg-slate-900 p-6 rounded-3xl text-white">
+                                        <p id="stat-2-val" class="text-3xl font-bold mb-1">12+</p>
+                                        <p id="stat-2-label" class="text-[10px] uppercase tracking-widest font-bold opacity-80">Seating Capacity</p>
+                                    </div>
+                                    <img id="img-sub" src="https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&q=80&w=600" class="rounded-3xl shadow-lg w-full h-64 object-cover" alt="Secondary View">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Text Details -->
+                        <div>
+                            <h2 id="room-title" class="text-3xl font-bold text-slate-900 mb-4">Executive Presentation Suite</h2>
+                            <p id="room-desc" class="text-slate-600 mb-8 leading-relaxed">
+                                Practice a thesis defense or conduct professional seminars with high-end audio-visual tech and modular seating for any audience.
+                            </p>
+                            <ul id="room-features" class="space-y-3 mb-10">
+                                <li class="flex items-center gap-3 font-medium text-slate-700 text-sm">
+                                    <i class="fa-solid fa-check-circle text-indigo-500"></i> Smart 85" Interactive Display
+                                </li>
+                                <li class="flex items-center gap-3 font-medium text-slate-700 text-sm">
+                                    <i class="fa-solid fa-check-circle text-indigo-500"></i> Video Conferencing Ready
+                                </li>
+                                <li class="flex items-center gap-3 font-medium text-slate-700 text-sm">
+                                    <i class="fa-solid fa-check-circle text-indigo-500"></i> Modular Furniture for Seminars
+                                </li>
+                            </ul>
+                            <button class="w-full bg-slate-900 hover:bg-indigo-600 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 group">
+                                Book This Space 
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const roomData = {
+            presentation: {
+                title: "Executive Presentation Suite",
+                desc: "Practice a thesis defense or conduct professional seminars with high-end audio-visual tech and modular seating for any audience.",
+                features: ["Smart 85\" Interactive Display", "Video Conferencing Ready", "Modular Furniture for Seminars"],
+                stat1: { val: "4K", label: "Laser Projection" },
+                stat2: { val: "12+", label: "Seating Capacity" },
+                img1: "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&q=80&w=600",
+                img2: "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&q=80&w=600",
+                color: "indigo"
+            },
+            pc: {
+                title: "High-Performance PC Desk",
+                desc: "Equipped with dual 32\" 4K monitors, ergonomic Herman Miller chairs, and pre-loaded creative software for demanding projects.",
+                features: ["RTX 4090 Workstations", "Ultra-wide Dual Monitors", "Mechanical Keyboards"],
+                stat1: { val: "10Gb", label: "Fiber Internet" },
+                stat2: { val: "24/7", label: "Secure Access" },
+                img1: "https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&q=80&w=600",
+                img2: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=600",
+                color: "slate"
+            },
+            group: {
+                title: "Collaborative Group Table",
+                desc: "Large modular tables designed for brainstorms. Features center-table power hubs and a dedicated ceiling-mounted whiteboard camera.",
+                features: ["Multi-user Power Hubs", "Ceiling Content Camera", "Writeable Glass Tabletop"],
+                stat1: { val: "6-8", label: "Group Size" },
+                stat2: { val: "3", label: "Glass Whiteboards" },
+                img1: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600",
+                img2: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=600",
+                color: "blue"
+            },
+            switch: {
+                title: "Dynamic Switch Desk",
+                desc: "The ultimate flexible workstation. Fully motorized sit-to-stand desks that allow you to change your posture with a single button press.",
+                features: ["Motorized Height Adjustment", "Anti-fatigue Standing Mats", "Cable Management Systems"],
+                stat1: { val: "SIT", label: "OR STAND" },
+                stat2: { val: "<3s", label: "Adjustment Speed" },
+                img1: "https://images.unsplash.com/photo-1595844730298-b960ff98fee0?auto=format&fit=crop&q=80&w=600",
+                img2: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=600",
+                color: "emerald"
+            }
+        };
+
+        function switchRoom(key) {
+            const data = roomData[key];
+            const content = document.getElementById('room-content');
+            
+            // Remove active classes
+            document.querySelectorAll('.room-tab').forEach(t => {
+                t.classList.remove('active');
+                t.querySelector('.icon-box').className = 'w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 icon-box';
+            });
+            
+            // Set active tab
+            const activeTab = document.getElementById(`tab-${key}`);
+            activeTab.classList.add('active');
+            activeTab.querySelector('.icon-box').className = 'w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white icon-box';
+
+            // Animation out
+            content.style.opacity = '0';
+            content.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                // Update text content
+                document.getElementById('room-title').innerText = data.title;
+                document.getElementById('room-desc').innerText = data.desc;
+                document.getElementById('img-main').src = data.img1;
+                document.getElementById('img-sub').src = data.img2;
+                
+                // Update stats
+                document.getElementById('stat-1-val').innerText = data.stat1.val;
+                document.getElementById('stat-1-label').innerText = data.stat1.label;
+                document.getElementById('stat-2-val').innerText = data.stat2.val;
+                document.getElementById('stat-2-label').innerText = data.stat2.label;
+                
+                // Update features
+                const list = document.getElementById('room-features');
+                list.innerHTML = data.features.map(f => `
+                    <li class="flex items-center gap-3 font-medium text-slate-700 text-sm">
+                        <i class="fa-solid fa-check-circle text-indigo-500"></i> ${f}
+                    </li>
+                `).join('');
+
+                // Update colors (simplified logic)
+                const stat1Box = document.getElementById('stat-1-box');
+                stat1Box.className = `p-6 rounded-3xl text-white transition-colors duration-500 ${key === 'switch' ? 'bg-emerald-600' : key === 'group' ? 'bg-blue-600' : 'bg-indigo-600'}`;
+
+                // Animation in
+                content.style.opacity = '1';
+                content.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        // Initialize state for transition
+        document.getElementById('room-content').style.transition = 'all 0.4s ease-out';
+    </script>
+
+
+    <!-- Environments (Updated) -->
+    <section id="zones" class="py-24 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="lg:col-span-1">
+                    <h2 class="text-5xl font-bold leading-tight mb-8">Conference for your <span class="text-indigo-400">Tempo.</span></h2>
+                    <p class="text-slate-400 mb-10 text-lg">We don't believe in "one size fits all." Different tasks require different atmospheres.</p>
+                    <a href="https://gemini.google.com/share/40a1c7f1b6df" target="_blank" class="inline-flex items-center gap-4 text-white font-bold group">
+                        <span class="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center group-hover:bg-indigo-600 transition-all">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                        Virtual Tour
+                    </a>
+                </div>
+                
+                <div class="lg:col-span-2 grid md:grid-cols-2 gap-8">
+                    <div class="group relative rounded-3xl overflow-hidden aspect-[4/5]">
+                        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent p-8 flex flex-col justify-end">
+                            <h4 class="text-2xl font-bold mb-2">Presentation ROOMS</h4>
+                            <p class="text-sm text-slate-300 mb-6 italic">Absolute silence .</p>
+                            <a href="#" target="_blank" class="bg-white text-slate-900 py-3 rounded-xl font-bold text-center">Book Desk</a>
+                        </div>
+                    </div>
+                    <div class="group relative rounded-3xl overflow-hidden aspect-[4/5]">
+                        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent p-8 flex flex-col justify-end">
+                            <h4 class="text-2xl font-bold mb-2">Group Discussion</h4>
+                            <p class="text-sm text-slate-300 mb-6 italic">Monitor-equipped desks for coding.</p>
+                            <a href="#" target="_blank" class="bg-white text-slate-900 py-3 rounded-xl font-bold text-center">Book Desk</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Room Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .room-tab.active {
+            background-color: #4f46e5;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans">
+
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Study Hub | Operations & Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .admin-glow:hover {
+            box-shadow: 0 0 30px rgba(79, 70, 229, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .booking-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .booking-card:hover {
+            border-color: #4f46e5;
+        }
+
+        .floating-booking {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(79, 70, 229, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+        }
+
+        .tab-active {
+            background-color: #4f46e5;
+            color: white;
+        }
+
+        .home-register-field {
+            width: 100%;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 0.85rem 1rem;
+            font: inherit;
+            outline: none;
+        }
+
+        .home-register-field:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
+        }
+
+        @media (max-width: 640px) {
+            html, body {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            #admin,
+            #booking {
+                padding-top: 3.5rem !important;
+                padding-bottom: 3.5rem !important;
+            }
+
+            #booking h2,
+            #admin h2 {
+                font-size: 2rem !important;
+                line-height: 1.15 !important;
+            }
+
+            #booking .gap-16 {
+                gap: 2rem !important;
+            }
+
+            #booking .rounded-\[3rem\],
+            #admin .rounded-\[2\.5rem\] {
+                border-radius: 1.25rem !important;
+            }
+
+            #booking .p-8 {
+                padding: 1rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <!-- Admin & Management Hub -->
+    <section id="admin" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-full text-xs font-bold uppercase tracking-widest">Efficiency Guaranteed</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-6">Admin & Operations Hub</h2>
+                <p class="text-slate-500 mt-4 max-w-2xl mx-auto text-lg">We manage the environment through invisible technology and elite hospitality, so you can focus entirely on the content.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Management Card 1 -->
+                <div class="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 admin-glow transition-all group">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-indigo-600 mb-6 shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-user-tie text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">On-Site Concierge</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-4">A dedicated floor manager is always present to ensure silence is maintained and your technical issues are resolved within minutes.</p>
+                    <div class="flex items-center text-indigo-600 text-xs font-bold tracking-wider uppercase">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-ping mr-2"></span>
+                        Currently On-Duty
+                    </div>
+                </div>
+
+                <!-- Management Card 2 -->
+                <div class="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 admin-glow transition-all group">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-indigo-600 mb-6 shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-fingerprint text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Smart Access Control</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-4">Our admin portal tracks attendance and manages desk bookings via RFID, ensuring that only registered members enter the focus zones.</p>
+                    <div class="flex items-center text-slate-400 text-xs font-medium italic">
+                        Secured by Biometrics & RFID
+                    </div>
+                </div>
+
+                <!-- Management Card 3 -->
+                <div class="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 admin-glow transition-all group">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-indigo-600 mb-6 shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-eye text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">24/7 Vigilance</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-4">Advanced CCTV monitoring and emergency SOS buttons at every desk connected to our main admin desk for total safety.</p>
+                    <div class="flex items-center text-slate-400 text-xs font-medium italic">
+                        Real-time Safety Feed
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Stats Panel -->
+            <div class="mt-12 bg-indigo-900 rounded-[2.5rem] p-8 md:p-12 text-white flex flex-wrap justify-center md:justify-between gap-8 items-center shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i class="fa-solid fa-shield-halved text-9xl"></i>
+                </div>
+                <div class="text-center relative z-10">
+                    <p class="text-4xl md:text-5xl font-bold mb-1">99.9%</p>
+                    <p class="text-xs uppercase tracking-widest text-indigo-300">WiFi Uptime</p>
+                </div>
+                <div class="text-center relative z-10">
+                    <p class="text-4xl md:text-5xl font-bold mb-1">1:50</p>
+                    <p class="text-xs uppercase tracking-widest text-indigo-300">Staff-to-Student</p>
+                </div>
+                <div class="text-center relative z-10">
+                    <p class="text-4xl md:text-5xl font-bold mb-1">5 Min</p>
+                    <p class="text-xs uppercase tracking-widest text-indigo-300">Avg. Tech Support</p>
+                </div>
+                <div class="text-center relative z-10">
+                    <p class="text-4xl md:text-5xl font-bold mb-1">Live</p>
+                    <p class="text-xs uppercase tracking-widest text-indigo-300">Safety Monitoring</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Booking & Membership Workflow -->
+    <section id="booking" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2">
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-6">How to Secure Your Spot</h2>
+                    <p class="text-slate-600 mb-10 text-lg">We offer seamless integration for both planned visits and spontaneous productivity sessions.</p>
+                    
+                    <div class="space-y-8">
+                        <!-- Step 1 -->
+                        <div class="flex gap-6">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl">1</div>
+                            <div>
+                                <h4 class="text-xl font-bold text-slate-900 mb-1">Online Pre-Booking</h4>
+                                <p class="text-slate-500">Browse available time slots on our portal, select your preferred desk zone, and pay instantly to lock in your seat.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="flex gap-6">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl">2</div>
+                            <div>
+                                <h4 class="text-xl font-bold text-slate-900 mb-1">Offline Register</h4>
+                                <p class="text-slate-500">Arrive at the reception, scan the lobby QR code to see real-time desk availability, and check in via our staff-assisted kiosk.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="flex gap-6">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl">3</div>
+                            <div>
+                                <h4 class="text-xl font-bold text-slate-900 mb-1">Instant Activation</h4>
+                                <p class="text-slate-500">Your RFID card or digital pass activates your desk's power and lighting system immediately upon tapping the reader.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 w-full">
+                    <div class="bg-white rounded-[3rem] shadow-xl p-8 border border-slate-100">
+                        <div class="flex mb-8 bg-slate-100 p-1.5 rounded-2xl">
+                            <button onclick="toggleBooking('online')" id="tab-online" class="flex-1 py-3 px-6 rounded-xl font-bold text-sm transition-all tab-active">NEW USER</button>
+                            <button onclick="toggleBooking('offline')" id="tab-offline" class="flex-1 py-3 px-6 rounded-xl font-bold text-sm transition-all text-slate-500">OFFLINE KIOSK</button>
+                        </div>
+
+                        <!-- New User Registration Content -->
+                        <div id="content-online" class="space-y-6">
+                            <div class="p-6 bg-indigo-50 rounded-2xl border border-indigo-100">
+                                <h5 class="font-bold text-indigo-900 flex items-center gap-2 mb-2">
+                                    <i class="fa-solid fa-user-plus"></i> New User Registration
+                                </h5>
+                                <p class="text-indigo-700 text-sm">Create your account first. Then you can reserve a seat and pay using your password.</p>
+                            </div>
+                            <form id="homeRegisterForm" class="space-y-4">
+                                <div class="grid sm:grid-cols-2 gap-4">
+                                    <input class="home-register-field" name="fullName" required placeholder="Full name">
+                                    <input class="home-register-field" name="phone" required inputmode="tel" placeholder="Phone">
+                                </div>
+                                <div class="grid sm:grid-cols-2 gap-4">
+                                    <input class="home-register-field" name="email" type="email" required placeholder="Email">
+                                    <select class="home-register-field" name="location" required>
+                                        <option value="">Location</option>
+                                        <option value="Pune">Pune</option>
+                                        <option value="Kolhapur">Kolhapur</option>
+                                        <option value="Sangli">Sangli</option>
+                                        <option value="Satara">Satara</option>
+                                    </select>
+                                </div>
+                                <input class="home-register-field" name="password" type="password" required minlength="6" placeholder="Create password">
+                                <button class="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 flex items-center justify-center gap-2" type="submit">
+                                    <i class="fa-solid fa-user-check"></i> Register & Continue
+                                </button>
+                                <p id="homeRegisterMessage" class="text-sm font-bold" hidden></p>
+                            </form>
+                        </div>
+
+                        <!-- Offline Form Content -->
+                        <div id="content-offline" class="space-y-6 hidden">
+                            <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                                <h5 class="font-bold text-slate-900 flex items-center gap-2 mb-2">
+                                    <i class="fa-solid fa-building"></i> On-Site Registration
+                                </h5>
+                                <p class="text-slate-600 text-sm">Perfect for impromptu study sessions. Visit our front desk for immediate access.</p>
+                            </div>
+                            <ul class="space-y-4 text-slate-600 text-sm">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-indigo-500"></i> Self-registration</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-indigo-500"></i> Cash & Digital payment accepted at desk</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-indigo-500"></i> Trial passes available (1-Day Only)</li>
+                            </ul>
+                            <div class="flex items-center gap-4 p-4 border-2 border-dashed border-slate-200 rounded-2xl">
+                                <div class="w-12 h-12 bg-slate-200 rounded flex items-center justify-center">
+                                    <i class="fa-solid fa-qrcode text-xl text-slate-400"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-800 text-xs">SCAN AT RECEPTION</p>
+                                    <p class="text-slate-400 text-[10px]">Lobby QR activates Guest Mode</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Action Button for Mobile -->
+    <div class="fixed bottom-6 right-6 z-[60] lg:hidden">
+        <a href="#booking" class="w-16 h-16 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow-2xl floating-booking">
+            <i class="fa-solid fa-calendar-check text-2xl"></i>
+        </a>
+    </div>
+
+    <!-- Final CTA -->
+    <section class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-slate-900"></div>
+        <!-- Texture overlay -->
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png')"></div>
+        <!-- Decorative light -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-indigo-600/20 blur-[100px] rounded-full"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-600/20 blur-[100px] rounded-full"></div>
+
+        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center text-white">
+            <h2 class="text-5xl md:text-7xl font-bold mb-8 leading-tight">Join the elite <br><span class="text-indigo-400 italic">top 1%.</span></h2>
+            <p class="text-xl text-slate-400 mb-12">Limited seats available. Secure your membership today <span class="text-white font-mono bg-slate-800 px-2 rounded">ELITE2026</span>.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="userportal.html" class="inline-block bg-white text-slate-900 px-12 py-6 rounded-2xl font-bold text-2xl hover:bg-indigo-400 hover:text-white transition-all transform hover:scale-105">
+                    REGISTER NOW
+                </a>
+                <button onclick="window.scrollTo(0,0)" class="text-slate-400 hover:text-white font-medium flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-up"></i> Back to Top
+                </button>
+            </div>
+
+            <div class="mt-12 flex justify-center gap-12 text-sm font-bold uppercase tracking-[0.2em] text-slate-500">
+                <span class="flex items-center gap-2"><i class="fa-solid fa-lock text-indigo-500"></i> Secure</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-eye-slash text-indigo-500"></i> Private</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-volume-xmark text-indigo-500"></i> Silent</span>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleBooking(type) {
+            const onlineBtn = document.getElementById('tab-online');
+            const offlineBtn = document.getElementById('tab-offline');
+            const onlineContent = document.getElementById('content-online');
+            const offlineContent = document.getElementById('content-offline');
+
+            if (type === 'online') {
+                onlineBtn.classList.add('tab-active');
+                onlineBtn.classList.remove('text-slate-500');
+                offlineBtn.classList.remove('tab-active');
+                offlineBtn.classList.add('text-slate-500');
+                onlineContent.classList.remove('hidden');
+                offlineContent.classList.add('hidden');
+            } else {
+                offlineBtn.classList.add('tab-active');
+                offlineBtn.classList.remove('text-slate-500');
+                onlineBtn.classList.remove('tab-active');
+                onlineBtn.classList.add('text-slate-500');
+                offlineContent.classList.remove('hidden');
+                onlineContent.classList.add('hidden');
+            }
+        }
+
+        const homeRegisterForm = document.getElementById('homeRegisterForm');
+        const homeRegisterMessage = document.getElementById('homeRegisterMessage');
+
+        if (homeRegisterForm) {
+            homeRegisterForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const formData = new FormData(homeRegisterForm);
+                homeRegisterMessage.hidden = false;
+                homeRegisterMessage.className = 'text-sm font-bold text-slate-500';
+                homeRegisterMessage.textContent = 'Creating account...';
+
+                try {
+                    const response = await fetch('./api/user_auth1.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            action: 'register',
+                            fullName: String(formData.get('fullName') || ''),
+                            phone: String(formData.get('phone') || ''),
+                            email: String(formData.get('email') || ''),
+                            location: String(formData.get('location') || ''),
+                            password: String(formData.get('password') || '')
+                        })
+                    });
+                    const result = await response.json();
+                    if (!response.ok || !result.ok) {
+                        throw new Error(result.error || 'Registration failed');
+                    }
+                    localStorage.setItem('elite-current-user', JSON.stringify(result.user));
+                    homeRegisterMessage.className = 'text-sm font-bold text-emerald-600';
+                    homeRegisterMessage.textContent = 'Account created. Opening reservation page...';
+                    setTimeout(() => {
+                        window.location.href = 'userportal.html';
+                    }, 700);
+                } catch (error) {
+                    homeRegisterMessage.className = 'text-sm font-bold text-rose-600';
+                    homeRegisterMessage.textContent = error.message;
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
+    <!-- Footer -->
+    <footer class="bg-white py-20 text-slate-500 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
+                <div class="max-w-xs">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 feature-icon rounded-xl flex items-center justify-center text-white">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span class="text-2xl font-bold text-slate-900 tracking-tight uppercase">ELITE</span>
+                    </div>
+                    <p class="text-sm leading-relaxed">The quietest place in the city to build your future. Open daily 6 AM to Midnight.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-16">
+                    <div>
+                        <h6 class="text-slate-900 font-bold mb-6 uppercase text-xs tracking-widest">Connect</h6>
+                        <ul class="space-y-4 text-sm font-medium">
+                            <li><a href="#" class="hover:text-indigo-600">Instagram</a></li>
+                            <li><a href="#" class="hover:text-indigo-600">LinkedIn</a></li>
+                            <li><a href="#" class="hover:text-indigo-600">Whatsapp</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h6 class="text-slate-900 font-bold mb-6 uppercase text-xs tracking-widest">Support</h6>
+                        <ul class="space-y-4 text-sm font-medium">
+                            <li><a href="https://gemini.google.com/share/40a1c7f1b6df" target="_blank" class="hover:text-indigo-600">Register</a></li>
+                            <li><a href="#" class="hover:text-indigo-600">Tour</a></li>
+                            <li><a href="#" class="hover:text-white">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                <p>© 2024 Elite STUDY ROOMS PRIVATE LIMITED.</p>
+                <div class="flex gap-8">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if(this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

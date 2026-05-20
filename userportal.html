@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Booking Portal - Elite Study Rooms</title>
+  <link rel="stylesheet" href="portal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="firstpageweb.html">
+        <span class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></span>
+        <span>ELITE<br><small>Study Rooms</small></span>
+      </a>
+      <nav class="nav-actions">
+        <a class="button secondary" href="firstpageweb.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a class="button secondary" href="userauth.html"><i class="fa-solid fa-user"></i> Login</a>
+        <a class="button secondary" href="adminpass.html"><i class="fa-solid fa-user-shield"></i> Admin</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-panel">
+        <p class="eyebrow"><i class="fa-solid fa-calendar-check"></i> User Slot Booking</p>
+        <h1>Reserve your exact desk like a bus seat.</h1>
+        <p class="lead" id="userGreeting">Login once, then choose your room, time, and seat.</p>
+        <div class="status-strip">
+          <div class="metric"><strong id="roomCount">0</strong><span>Active Rooms</span></div>
+          <div class="metric"><strong id="slotCount">0</strong><span>Daily Slots</span></div>
+          <div class="metric"><strong id="todayCount">0</strong><span>Today Bookings</span></div>
+        </div>
+        <div id="loginNotice" class="notice" hidden></div>
+      </div>
+
+      <form id="bookingForm" class="panel grid" autocomplete="on">
+        <div class="toolbar">
+          <div>
+            <p class="eyebrow"><i class="fa-solid fa-pen-to-square"></i> Reservation</p>
+            <h2>Student Details</h2>
+          </div>
+          <span id="dbMode" class="badge">Checking database</span>
+        </div>
+
+        <div class="grid two">
+          <div class="field">
+            <label for="userName">Full Name</label>
+            <input id="userName" name="userName" required placeholder="Student name">
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" required inputmode="tel" placeholder="10 digit mobile">
+          </div>
+        </div>
+
+        <div class="grid two">
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="student@email.com">
+          </div>
+          <div class="field">
+            <label for="bookingDate">Date</label>
+            <input id="bookingDate" name="bookingDate" type="date" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="roomSelect">Room / Zone</label>
+          <select id="roomSelect" name="roomSelect" required></select>
+        </div>
+
+        <div class="field">
+          <label>Available Slots</label>
+          <div id="slotGrid" class="slot-grid"></div>
+        </div>
+
+        <div class="field">
+          <label>Desk / Room Map</label>
+          <div class="reservation-map">
+            <div class="map-legend">
+              <span><i class="legend-dot free"></i>Available</span>
+              <span><i class="legend-dot selected"></i>Selected</span>
+              <span><i class="legend-dot booked"></i>Booked</span>
+            </div>
+            <div id="seatMap" class="seat-map"></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" placeholder="Optional request, exam timing, group size, etc."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="bookingPassword">Account Password</label>
+          <input id="bookingPassword" name="bookingPassword" type="password" required placeholder="Enter your login password to reserve">
+        </div>
+
+        <button id="submitBooking" class="button" type="submit">
+          <i class="fa-solid fa-paper-plane"></i> Send Booking Request
+        </button>
+        <div id="bookingMessage" class="notice" hidden></div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="toolbar">
+        <div>
+          <p class="eyebrow"><i class="fa-solid fa-receipt"></i> Your Recent Requests</p>
+          <h2>Booking Status</h2>
+        </div>
+        <button id="refreshBtn" class="button secondary" type="button"><i class="fa-solid fa-rotate"></i> Refresh</button>
+      </div>
+      <div id="bookingList" class="list"></div>
+    </section>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
+  <script src="./firebase-config.js"></script>
+  <script src="./userportal.js"></script>
+</body>
+</html>
